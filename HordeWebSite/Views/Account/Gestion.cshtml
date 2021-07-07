@@ -1,0 +1,52 @@
+﻿@model HordeWebSite.Models.ViewModel.GestionVM
+
+    <div class="container ">
+        <h2>Ajout role utilisateur</h2>
+        <form id="ajoutRole" method="post" asp-action="changeRole" asp-controller="Account">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <select class="form-select" name="UserName" aria-label="Default select example">
+                    <option>---</option>
+                    @foreach (var item in Model.listItem)
+                    {
+                        <option value="@item.UserName">@item.UserName</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2"></label>
+                <div class="col-md-10">
+                    <select asp-items="@HordeWebSite.Utility.Helper.GetRolesForDropdown(User.IsInRole("Admin"))" name="newRole" class="form-control"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10 offset-2">
+                    <input type="submit" value="changeRole" class="btn btn-success" />
+                </div>
+            </div>
+        </form>
+        <h2>supprimer role utilisateur</h2>
+        <form id="deleteRole" method="post" asp-action="deleteRole" asp-controller="Account">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <select id="selectUser" class="form-select" name="UserName" aria-label="Default select example">
+                    <option>---</option>
+                    @foreach (var item in Model.listItem)
+                    {
+                    <option value="@item.UserName">@item.UserName</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2"></label>
+                <div class="col-md-10">
+                    <select id="listRole" name="NewRole" class="form-control"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10 offset-2">
+                    <input type="submit" value="deleteRole" class="btn btn-danger" />
+                </div>
+            </div>
+        </form>
+    </div>

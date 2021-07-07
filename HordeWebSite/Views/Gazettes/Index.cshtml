@@ -1,0 +1,76 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> signInManager
+@model List<string>
+
+@{
+    ViewData["Title"] = "Gazette";
+}
+<div class="main">
+    <div class="titreGazette">
+        <h1>Gazettes</h1>
+    </div>
+    <div class="row m-0 contenuGazette">
+        <div class="col-md-2 align-self-center">
+            <form id="formGazette" asp-action="OnSelectDate" asp-controller="Gazettes">
+                @if (Model.Count() > 0)
+                {
+                    Model.Reverse();
+                    var i = 0;
+                    <div class="col btn-group-vertical btn-group-toggle" data-toggle="buttons">
+                        @foreach (var Item in Model)
+                        {
+                            if (i == 0)
+                            {
+                                <label class="btn btn-secondary active">
+                                    <input type="radio" class="gazetteRadio" name="Date" value="@Item" asp-route-Date="@Item" checked />
+                                    @Item
+                                </label>
+                                i++;
+                            }
+                            else
+                            {
+                                <label class="btn btn-secondary">
+                                    <input type="radio" class="gazetteRadio" name="Date" value="@Item" />
+                                    @Item
+                                </label>
+                            }
+                        }
+                    </div>
+                }
+            </form>
+            @if (signInManager.IsSignedIn(User))
+            {
+                @if (User.IsInRole("Redacteur"))
+                {
+                    <div class="row justify-content-end">
+                        <a class="btn-primary btn mr-1" asp-controller="Gazettes" asp-action="Create">Créer</a>
+                        <a id="deleteGazette" class="btn-danger btn" asp-controller="Gazettes" asp-action="Delete">Supprimer</a>
+                    </div>
+
+                }
+            }
+        </div>
+        <div class="col-md-10">
+            <div id="partial" class="row justify-content-center partialGazette"></div>
+            <div class="row justify-content-center align-self-end ">
+                <button class="btn btn-primary btn-sm" id="previousGazette" onclick="this.blur();">-</button>
+                <div id="pageNumber"></div>
+                <button class="btn btn-primary btn-sm" id="nextGazette" onclick="this.blur();">+</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+                $.getScript("js/site.js")
+                    .done(function (script, textStatus) {
+                        doGazetteUpdate();
+                        handleBtn();
+                    })
+                    .fail(function (jqxhr, settings, exception) {
+                        console.log('failed to load script');
+                    });
+    </script>
+}

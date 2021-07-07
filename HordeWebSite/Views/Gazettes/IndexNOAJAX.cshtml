@@ -1,0 +1,27 @@
+﻿@model Tuple<List<string>, IEnumerable<Gazette>>
+
+@{
+    ViewData["Title"] = "Gazette";
+}
+
+<h1>Gazette-index</h1>
+
+<a class="btn-primary" asp-controller="Gazettes" asp-action="Create">Gazette</a>
+<br />
+
+<div class="row">
+    <div class="col-sm">
+
+        @if (Model.Item1.Count() > 0)
+        {
+            @foreach (var Item in Model.Item1)
+            {
+                <a class="nav-link text-dark" asp-area="" asp-controller="Gazettes" asp-action="OnSelectDate" asp-route-Date="@Item">@Item</a>
+                <br />
+            }
+        }
+    </div>
+    <div class="col-sm">
+        <partial name="Details" model="Model.Item2" />
+    </div>
+</div>

@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="homebg">
+    <div class="row bg_parallax justify-content-center m-0" style="background-image: url(../data/img/Image_home_start.jpg);">
+        <div class="align-self-center text-center col-10">
+            <h1 class="text-light font-weight-bold">LA HORDE D'IVALICE - ODIN(Light)</h1>
+            <img src="~/data/img/edb20abafbe7bd72dfe8ff1b3f7d020619d5418f.jpg" width="300" />
+        </div>
+    </div>
+
+
+    <div class="text-light p-4 homeContainer shadow-lg box-shadow">
+        <div class="intro text-justify text-center">
+            <h3 class="font-weight-bold">Bienvenue a toi Loup!</h3>
+            <br />
+            <p>
+                Nous t'accueillons les bras ouverts dans notre Horde,
+            </p>
+            <p>
+                En fonctions de tes projets envisagés et de ton niveau de jeu actuel nous mettons à ta disposition des outils
+                qui pourront justement te permettre de vivre pleinement ton aventure Final Fantasy XIV.
+            </p>
+            <p>
+                Des référents seront là pour t'aiguiller afin de répondre à chacune de tes questions !
+                le but étant de faire cela dans un climat convivial, garanti sans assistanat & totale liberté pour plus de plaisir.
+            </p>
+            <p>
+                C'est notre mission à la Horde D'Ivalice, objectif 0% laissé pour compte!
+                Si tu débutes et que tu veux découvrir le jeu de façon sereine sans prise de tête ou que tu sois niveau max mais que tu tournes en en rond n'hésites pas.
+            </p>
+        </div>
+    </div>
+
+    <div class="text-light p-4 container">
+        <div class="homeContent">
+            <div>
+                <div id="partial"></div>
+            </div>
+        </div>
+    </div>
+    <div class="bg_parallax" style="background-image: url(../data/img/Image_home_Hildoffice.jpg);">
+    </div>
+
+
+    <div class="text-light p-4">
+        <div class="row">
+            <div class="hildiDiv homeContent align-self-center col-md-4 offset-md-1">
+                <img src="~/data/img/image0.png" />
+            </div>
+            <div class="hildiVid align-self-center col-md-5 offset-md-1 embed-responsive embed-responsive-16by9">
+                <iframe src="https://www.youtube.com/embed/v7rz6Z0NgKk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="row bg_parallax justify-content-center m-0" style="background-image: url(../data/img/Image_home_end.jpg);">
+        <div class="align-self-end linkLodestoneRecruitement">
+            <a href="https://fr.finalfantasyxiv.com/lodestone/community_finder/09b6b95300bde92012bbfee15e1843f6fcb4708f/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary left">>>> NOUS REJOINDRE <<<</a>
+        </div>
+    </div>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - <a href="https://fr.finalfantasyxiv.com/lodestone/freecompany/9232660711086352057/" target="_blank" rel="noopener noreferrer">LA HORDE D'IVALICE - ODIN(Light) </a>
+
+        </div>
+    </footer>
+</div>
+@section scripts{
+    <script>
+            $.ajax({
+                type: "GET",
+                url: 'Downs/getCarouselAllDown',
+                success: function (data) {
+                    $('#partial').html(data);
+                }
+            });
+    </script>
+}
+
+
+
+
