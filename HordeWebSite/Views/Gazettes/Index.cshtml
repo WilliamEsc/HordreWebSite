@@ -62,15 +62,3 @@
 </div>
 
 
-@section scripts{
-    <script>
-                $.getScript("js/site.js")
-                    .done(function (script, textStatus) {
-                        doGazetteUpdate();
-                        handleBtn();
-                    })
-                    .fail(function (jqxhr, settings, exception) {
-                        console.log('failed to load script');
-                    });
-    </script>
-}

@@ -3,6 +3,9 @@
 
 // Write your JavaScript code.
 $(function () {
+    doGazetteUpdate();
+    handleBtn();
+
     $(".gazetteRadio").change(function () {
         doGazetteUpdate(); 
     });

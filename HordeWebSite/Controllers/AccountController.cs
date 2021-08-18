@@ -15,13 +15,11 @@ namespace HordeWebSite.Controllers
     public class AccountController : Controller
     {
         private readonly ApplicationDbContext _db;
-        private readonly IMailService _mailService;
         UserManager<ApplicationUser> _userManager;
         SignInManager<ApplicationUser> _signInManager;
         RoleManager<IdentityRole> _roleManager;
 
         public AccountController(ApplicationDbContext db,
-                                    IMailService mailService,
                                     UserManager<ApplicationUser> userManager,
                                     SignInManager<ApplicationUser> signInManager,
                                     RoleManager<IdentityRole> roleManager)
@@ -30,7 +28,6 @@ namespace HordeWebSite.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
-            _mailService = mailService;
         }
 
         public IActionResult Login()
@@ -120,13 +117,6 @@ namespace HordeWebSite.Controllers
                        "ConfirmEmail", "Account",
                        new { userId = user.Id, code = code },
                        protocol: "https");
-
-                    MailRequest mail = new MailRequest(
-                        user.Email,
-                       "Confirm your account",
-                       "Please confirm your account by clicking this link: <a href=\""
-                                                       + callbackUrl + "\">link</a>");
-                    await _mailService.SendEmailAsync(mail);
                     return RedirectToAction("Index", "Home");
                 }
                 foreach(var err in result.Errors)
